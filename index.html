@@ -7,9 +7,7 @@
     <title>Meme Maker</title>
   </head>
   <body>
-    <canvas></canvas>
-    <input type="range" id="line-width" min="1" max="10" value="5" step="0.5" />
-    <div>
+    <div class="color-options">
       <input type="color" id="color" />
       <div
         class="color-option"
@@ -48,13 +46,13 @@
       ></div>
       <div
         class="color-option"
-        style="background-color: #95a5a6"
-        data-color="#95a5a6"
+        style="background-color: #fd79a8"
+        data-color="#fd79a8"
       ></div>
       <div
         class="color-option"
-        style="background-color: #d35400"
-        data-color="#d35400"
+        style="background-color: #81ecec"
+        data-color="#81ecec"
       ></div>
       <div
         class="color-option"
@@ -63,8 +61,8 @@
       ></div>
       <div
         class="color-option"
-        style="background-color: #2ecc71"
-        data-color="#2ecc71"
+        style="background-color: #fab1a0"
+        data-color="#fab1a0"
       ></div>
       <div
         class="color-option"
@@ -72,9 +70,26 @@
         data-color="#e67e22"
       ></div>
     </div>
-    <button id="mode-btn">Fill</button>
-    <button id="destroy-btn">Destroy</button>
-    <button id="eraser-btn">Erase</button>
+    <canvas></canvas>
+    <div class="btns">
+      <input
+        type="range"
+        id="line-width"
+        min="1"
+        max="10"
+        value="5"
+        step="0.5"
+      />
+      <button id="mode-btn">🩸 Fill</button>
+      <button id="destroy-btn">💣 Destroy</button>
+      <button id="eraser-btn">❌ Erase</button>
+      <label for="file">
+        🏞️ Add Photo
+        <input type="file" accept="image/*" id="file" />
+      </label>
+      <input type="text" placeholder="Add text here..." id="text" />
+      <button id="save">🖼️ Save image</button>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
