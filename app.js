@@ -1,3 +1,5 @@
+const paintingFill = document.getElementById('fill-painting');
+const fillBtn = document.getElementById('fill');
 const saveBtn = document.getElementById('save');
 const textInput = document.getElementById('text');
 const fileInput = document.getElementById('file');
@@ -22,6 +24,8 @@ ctx.lineCap = 'round';
 
 let isPainting = false;
 let isFilling = false;
+let isStroke = true;
+let fillPainting = false;
 
 function onMove(event) {
   if (isPainting) {
@@ -38,6 +42,11 @@ function startPainting() {
 
 function cancelPainting() {
   isPainting = false;
+  if (fillPainting) {
+    ctx.fill();
+  } else {
+    ctx.stroke();
+  }
   ctx.beginPath();
 }
 
@@ -100,7 +109,11 @@ function onDoubleClick(event) {
     ctx.save();
     ctx.lineWidth = 1;
     ctx.font = '58px serif';
-    ctx.strokeText(text, event.offsetX, event.offsetY);
+    if (isStroke) {
+      ctx.strokeText(text, event.offsetX, event.offsetY);
+    } else {
+      ctx.fillText(text, event.offsetX, event.offsetY);
+    }
     ctx.restore();
   }
 }
@@ -111,6 +124,17 @@ function onSaveClick() {
   a.href = url;
   a.download = 'mayDrawing.png';
   a.click();
+}
+
+function textStyleChange() {
+  isStroke = !isStroke;
+  fillBtn.innerText = !isStroke ? 'Fill Text' : 'Stroke Text';
+}
+
+function paintingChange() {
+  fillPainting = !fillPainting;
+  paintingFill.innerText = !fillPainting ? 'Fill Painting' : 'Stroke Painting';
+  cancelPainting();
 }
 
 canvas.addEventListener('dblclick', onDoubleClick);
@@ -132,3 +156,5 @@ destroyByn.addEventListener('click', onDestroyClick);
 eraserBtn.addEventListener('click', onEraserClick);
 fileInput.addEventListener('change', onFileChange);
 saveBtn.addEventListener('click', onSaveClick);
+fillBtn.addEventListener('click', textStyleChange);
+paintingFill.addEventListener('click', paintingChange);
